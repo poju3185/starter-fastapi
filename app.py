@@ -14,24 +14,15 @@ class Item(BaseModel):
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Hello"}
 
 
-@app.get('/favicon.ico', include_in_schema=False)
-async def favicon():
-    return FileResponse('favicon.ico')
-
-
-@app.get("/react-job-router/{id}")
+@app.get("/react-job-router/job/{id}")
 async def read_item(id: str):
     return job_data[id]
 
 
-@app.get("/items/")
+@app.get("/react-job-router/job")
 async def list_items():
-    return [{"item_id": 1, "name": "Foo"}, {"item_id": 2, "name": "Bar"}]
+    return [job for job in job_data.values()]
 
-
-@app.post("/items/")
-async def create_item(item: Item):
-    return item
