@@ -2,9 +2,11 @@ from fastapi import FastAPI
 from fastapi.responses import FileResponse
 
 from pydantic import BaseModel
-
+import json
 app = FastAPI()
 
+open("job_data.json", 'r', encoding='utf-8') as file:
+  job_data = json.load(file)
 
 class Item(BaseModel):
     item_id: int
@@ -20,9 +22,9 @@ async def favicon():
     return FileResponse('favicon.ico')
 
 
-@app.get("/item/{item_id}")
-async def read_item(item_id: int):
-    return {"item_id": item_id}
+@app.get("/react-job-router/{id}")
+async def read_item(id: str):
+    return job_data[id]
 
 
 @app.get("/items/")
