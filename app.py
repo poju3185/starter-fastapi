@@ -5,7 +5,7 @@ from pydantic import BaseModel
 import json
 app = FastAPI()
 
-open("job_data.json", 'r', encoding='utf-8') as file:
+with open("job_data.json", 'r', encoding='utf-8') as file:
   job_data = json.load(file)
 
 class Item(BaseModel):
